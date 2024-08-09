@@ -19,13 +19,10 @@ jobs:
         include:
         - runner: ubuntu-latest
           arch: x64
-          version: "2.0-64"
         - runner: macos-13
           arch: x64
-          version: "2.0-64"
         - runner: macos-14
           arch: arm64
-          version: "2.0-64"
 
     steps:
       - name: checkout
@@ -33,7 +30,7 @@ jobs:
       - name: Open Watcom setup
         uses: open-watcom/setup-watcom@v0
         with:
-          version: ${{ matrix.version }}
+          version: "2.0-64"
       - name: checkout ELKS
         uses: actions/checkout@v4
       - name: build ${{ matrix.runner }}-${{ matrix.arch }}
