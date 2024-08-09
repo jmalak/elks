@@ -9,13 +9,13 @@ on:
     paths:
       - 'libc/**'
       - '.github/workflows/ow-libc.yml'
+env: 
+  TOPDIR: ${{ github.workspace }}
 
 jobs:
   build:
     name: OW LIBC build
     runs-on: ${{ matrix.runner }}
-    env: 
-      TOPDIR: ${{ github.workspace }}
     strategy:
       matrix:
         include:
