@@ -35,8 +35,8 @@ jobs:
         uses: actions/checkout@v4
       - name: build ${{ matrix.runner }}-${{ matrix.arch }}
         run: |
-          . ./env.sh
-          cd libc
-          sh ./ow-libc.sh
-          cd ..
+          ./ow-libc.sh
+        env: 
+          TOPDIR: ${env:GITHUB_WORKSPACE}
+        working-directory: libc
 
