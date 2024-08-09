@@ -41,9 +41,9 @@ jobs:
       - name: build smples
         working-directory: elkscmd/basic
         run: |
-          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewcc basic.c
-          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host.c
-          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host-stubs.c
-          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewlink basic.obj host.obj host-stubs.obj
-          cp basic.os2 ${env:GITHUB_WORKSPACE}/elkscmd/rootfs_template/root
+          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewcc basic.c
+          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host.c
+          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host-stubs.c
+          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewlink basic.obj host.obj host-stubs.obj
+          cp basic.os2 ${GITHUB_WORKSPACE}/elkscmd/rootfs_template/root
 
