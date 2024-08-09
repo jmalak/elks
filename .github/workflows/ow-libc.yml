@@ -13,7 +13,15 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner:
+          - ubuntu-latest
+          - macos-13
+          - macos-14
+        version:
+          - "2.0-64"
 
     steps:
       - name: checkout
