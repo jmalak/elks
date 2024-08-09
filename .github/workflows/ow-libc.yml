@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-
+    name: OW LIBC build
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
