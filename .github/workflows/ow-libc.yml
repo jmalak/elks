@@ -15,7 +15,7 @@ jobs:
     name: OW LIBC build
     runs-on: ${{ matrix.runner }}
     env: 
-      TOPDIR: ${GITHUB_WORKSPACE}
+      TOPDIR: ${{ env:GITHUB_WORKSPACE }}
     strategy:
       matrix:
         include:
@@ -41,9 +41,9 @@ jobs:
       - name: build smples
         working-directory: elkscmd/basic
         run: |
-          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewcc basic.c
-          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host.c
-          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host-stubs.c
-          ${GITHUB_WORKSPACE}/elks/tools/objtools/ewlink basic.obj host.obj host-stubs.obj
-          cp basic.os2 ${GITHUB_WORKSPACE}/elkscmd/rootfs_template/root
+          $GITHUB_WORKSPACE/elks/tools/objtools/ewcc basic.c
+          $GITHUB_WORKSPACE/elks/tools/objtools/ewcc host.c
+          $GITHUB_WORKSPACE/elks/tools/objtools/ewcc host-stubs.c
+          $GITHUB_WORKSPACE/elks/tools/objtools/ewlink basic.obj host.obj host-stubs.obj
+          cp basic.os2 $GITHUB_WORKSPACE/elkscmd/rootfs_template/root
 
