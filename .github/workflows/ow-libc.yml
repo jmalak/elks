@@ -16,15 +16,16 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        version:
-        - "2.0-64"
         include:
         - runner: ubuntu-latest
           arch: x64
+          version: "2.0-64"
         - runner: macos-13
           arch: x64
+          version: "2.0-64"
         - runner: macos-14
           arch: arm64
+          version: "2.0-64"
 
     steps:
       - name: checkout
