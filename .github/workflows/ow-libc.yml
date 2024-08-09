@@ -1,0 +1,33 @@
+name: main
+
+on:
+  push:
+    paths:
+      - 'libc/**'
+      - '!.github/workflows/ow-libc.yml'
+  pull_request:
+    paths:
+      - 'libc/**'
+      - '!.github/workflows/ow-libc.yml'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Open Watcom setup
+        uses: open-watcom/setup-watcom@v0
+        with:
+          version: "2.0"
+      - name: checkout ELKS
+        uses: actions/checkout@v2
+      - name: build
+        run: |
+          . ./env.sh
+          cd libc
+          sh ./ow-libc.sh
+          cd ..
+
