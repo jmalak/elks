@@ -4,13 +4,23 @@ on:
   push:
     paths:
       - 'libc/**'
+      - 'elks/include/**'
+      - 'elks/tools/objtools/**'
+      - 'include/**'
+      - 'elkscmd/basic/**'
       - '.github/workflows/ow-libc.yml'
   pull_request:
     paths:
       - 'libc/**'
+      - 'elks/include/**'
+      - 'elks/tools/objtools/**'
+      - 'include/**'
+      - 'elkscmd/basic/**'
       - '.github/workflows/ow-libc.yml'
 env: 
   TOPDIR: ${{ github.workspace }}
+  TOOLDIR: ${{ github.workspace }}/elks/tools/objtools
+  SAMPLEDIR: ${{ github.workspace }}/elkscmd/rootfs_template/root
 
 jobs:
   build:
@@ -38,12 +48,12 @@ jobs:
         run: |
           make -f watcom.mk clean
           make -f watcom.mk
-      - name: build smples
+      - name: build ELKS samples
         working-directory: elkscmd/basic
         run: |
-          $GITHUB_WORKSPACE/elks/tools/objtools/ewcc basic.c
-          $GITHUB_WORKSPACE/elks/tools/objtools/ewcc host.c
-          $GITHUB_WORKSPACE/elks/tools/objtools/ewcc host-stubs.c
-          $GITHUB_WORKSPACE/elks/tools/objtools/ewlink basic.obj host.obj host-stubs.obj
-          cp basic.os2 $GITHUB_WORKSPACE/elkscmd/rootfs_template/root
+          $TOOLDIR/ewcc basic.c
+          $TOOLDIR/ewcc host.c
+          $TOOLDIR/ewcc host-stubs.c
+          $TOOLDIR/ewlink basic.obj host.obj host-stubs.obj
+          cp basic.os2 $SAMPLEDIR
 
