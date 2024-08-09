@@ -1,14 +1,14 @@
-name: main
+name: ow-libc
 
 on:
   push:
     paths:
       - 'libc/**'
-      - '!.github/workflows/ow-libc.yml'
+      - '.github/workflows/ow-libc.yml'
   pull_request:
     paths:
       - 'libc/**'
-      - '!.github/workflows/ow-libc.yml'
+      - '.github/workflows/ow-libc.yml'
 
 jobs:
   build:
