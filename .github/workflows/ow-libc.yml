@@ -15,7 +15,7 @@ jobs:
     name: OW LIBC build
     runs-on: ${{ matrix.runner }}
     env: 
-      TOPDIR: ${{ env.github.workspace }}
+      TOPDIR: ${{ github.workspace }}
     strategy:
       matrix:
         include:
