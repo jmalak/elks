@@ -16,12 +16,15 @@ jobs:
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:
-        runner:
-          - ubuntu-latest
-          - macos-13
-          - macos-14
         version:
           - "2.0-64"
+        include:
+          - runner: ubuntu-latest
+            arch: x64
+          - runner: macos-13
+            arch: x64
+          - runner: macos-14
+            arch: arm64
 
     steps:
       - name: checkout
@@ -32,7 +35,7 @@ jobs:
           version: ${{ matrix.version }}
       - name: checkout ELKS
         uses: actions/checkout@v4
-      - name: build
+      - name: build ${{ matrix.runner }}-${{ matrix.arch }}
         run: |
           . ./env.sh
           cd libc
