@@ -31,10 +31,21 @@ jobs:
         uses: open-watcom/setup-watcom@v0
         with:
           version: "2.0-64"
-      - name: build ${{ matrix.runner }}-${{ matrix.arch }}
+      - name: LIBC build ${{ matrix.runner }}-${{ matrix.arch }}
         working-directory: libc
         run: |
-          ./ow-libc.sh
+          make -f watcom.mk clean
+          make -f watcom.mk
+        env: 
+          TOPDIR: ${env:GITHUB_WORKSPACE}
+      - name: build smples
+        working-directory: ${env:GITHUB_WORKSPACE}/elkscmd/basic
+        run: |
+          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewcc basic.c
+          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host.c
+          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host-stubs.c
+          ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewlink basic.obj host.obj host-stubs.obj
+          cp basic.os2 ${env:GITHUB_WORKSPACE}/elkscmd/rootfs_template/root
         env: 
           TOPDIR: ${env:GITHUB_WORKSPACE}
 
