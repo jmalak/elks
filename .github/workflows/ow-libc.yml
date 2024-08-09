@@ -14,6 +14,8 @@ jobs:
   build:
     name: OW LIBC build
     runs-on: ${{ matrix.runner }}
+    env: 
+      TOPDIR: ${env:GITHUB_WORKSPACE}
     strategy:
       matrix:
         include:
@@ -36,8 +38,6 @@ jobs:
         run: |
           make -f watcom.mk clean
           make -f watcom.mk
-        env: 
-          TOPDIR: ${env:GITHUB_WORKSPACE}
       - name: build smples
         working-directory: ${env:GITHUB_WORKSPACE}/elkscmd/basic
         run: |
@@ -46,6 +46,4 @@ jobs:
           ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewcc host-stubs.c
           ${env:GITHUB_WORKSPACE}/elks/tools/objtools/ewlink basic.obj host.obj host-stubs.obj
           cp basic.os2 ${env:GITHUB_WORKSPACE}/elkscmd/rootfs_template/root
-        env: 
-          TOPDIR: ${env:GITHUB_WORKSPACE}
 
